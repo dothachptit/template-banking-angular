@@ -1,0 +1,145 @@
+<div class="table-responsive bang">
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Quản lý nhân viên">
+            <div class="search" style="margin-top: 10px;">
+                <mat-form-field appearance="fill">
+                    <mat-label>ID nhân viên</mat-label>
+                    <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idEmployeeSearching">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="getEmployeesByID()" style="margin-left: 50px;">Tìm kiếm theo ID</button>
+                <button mat-raised-button color="primary" (click)="getAllEmployees()" style="margin-left: 50px;">Liệt kê toàn bộ nhân viên</button>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Username nhân viên</mat-label>
+                    <input matInput placeholder="Ex. toanhv22" value="" [(ngModel)]="usernameEmployeeSearching">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="getEmployeesByUsername()" style="margin-left: 50px;">Tìm kiếm theo tên tài khoản</button>
+                <button mat-raised-button color="primary" (click)="openDialogAddEmployee()" style="margin-left: 50px;">Thêm nhân viên</button>
+            </div>
+            <div>
+                <table mat-table [dataSource]="employeeDataSource" class="mat-elevation-z8">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="idCard">
+                        <th mat-header-cell *matHeaderCellDef>Số CMT</th>
+                        <td mat-cell *matCellDef="let element">{{element.idCard}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="fullName">
+                        <th mat-header-cell *matHeaderCellDef>Tên</th>
+                        <td mat-cell *matCellDef="let element">{{element.fullName}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="phoneNumber">
+                        <th mat-header-cell *matHeaderCellDef>SĐT</th>
+                        <td mat-cell *matCellDef="let element">{{element.phoneNumber}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="monthlySalary">
+                        <th mat-header-cell *matHeaderCellDef>Lương tháng</th>
+                        <td mat-cell *matCellDef="let element">{{element.monthlySalary | currency: 'VND'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dateOfBirth">
+                        <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+                        <td mat-cell *matCellDef="let element">{{element.dateOfBirth}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
+                        <td mat-cell *matCellDef="let element">{{element.address}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="jobLevel">
+                        <th mat-header-cell *matHeaderCellDef>Bậc nghề</th>
+                        <td mat-cell *matCellDef="let element">{{element.jobLevel}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="seniority">
+                        <th mat-header-cell *matHeaderCellDef>Số năm kinh nghiệm</th>
+                        <td mat-cell *matCellDef="let element">{{element.seniority}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef>Vị trí</th>
+                        <td mat-cell *matCellDef="let element">{{element.position}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="accountId">
+                        <th mat-header-cell *matHeaderCellDef>Mã tài khoản</th>
+                        <td mat-cell *matCellDef="let element">{{element.accountId}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="accent" (click)="openDialogUpdateEmployee(element.id)">Sửa</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedEmployee"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedEmployee;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Quản lý lương nhân viên">
+            <div class="search" style="margin-top: 10px;">
+                <form (ngSubmit)="onGeneratePaycheckByTime()">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tháng</mat-label>
+                        <input type="number" matInput placeholder="Ex. 8" [(ngModel)]="month" name="month">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-left: 15px;">
+                        <mat-label>Năm</mat-label>
+                        <input type="number" matInput placeholder="Ex. 2021" [(ngModel)]="year" name="year">
+                    </mat-form-field>
+                    <button type="submit" mat-raised-button color="primary" style="margin-left: 50px;">Xuất phiếu lương theo thời gian</button>
+                </form>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>ID nhân viên</mat-label>
+                    <input matInput placeholder="Ex. toanhv22" value="" [(ngModel)]="idEmployeeSearchSalary">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSearchSalaryByEmployeeID()" style="margin-left: 50px;">Tìm kiếm theo ID nhân viên</button>
+            </div>
+            <div>
+                <table mat-table [dataSource]="paycheckDataSource" class="mat-elevation-z8"> -->
+                    <ng-container matColumnDef="paycheckId">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.paycheckId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="employeeId">
+                        <th mat-header-cell *matHeaderCellDef> ID nhân viên </th>
+                        <td mat-cell *matCellDef="let element">{{element.employeeId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="employeeName">
+                        <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
+                        <td mat-cell *matCellDef="let element">{{element.employeeName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Tổng lương</th>
+                        <td mat-cell *matCellDef="let element">{{element.amount | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="monthlySalary">
+                        <th mat-header-cell *matHeaderCellDef>Lương cứng hàng tháng</th>
+                        <td mat-cell *matCellDef="let element">{{element.monthlySalary | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdDate">
+                        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+                        <td mat-cell *matCellDef="let element">{{element.createdDate}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="month">
+                        <th mat-header-cell *matHeaderCellDef>Tháng</th>
+                        <td mat-cell *matCellDef="let element">{{element.month}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="year">
+                        <th mat-header-cell *matHeaderCellDef>Năm</th>
+                        <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedPaycheck"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedPaycheck;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

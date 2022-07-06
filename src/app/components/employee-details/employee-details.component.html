@@ -1,0 +1,82 @@
+<div class="table-responsive bang">
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Thông tin tài khoản">
+            <div>
+                <mat-list role="list" style="color: black;font-weight: bold;">
+                    <mat-list-item role="listitem">ID:
+                        <b>{{employee.id}}</b>
+                    </mat-list-item>
+                    <mat-list-item role="listitem">Số CMT: <b>{{employee.idCard}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Tên: <b>{{employee.fullName}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số điện thoại: <b>{{employee.phoneNumber}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Lương cứng hàng tháng: <b>{{employee.monthlySalary}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày sinh: <b>{{employee.dateOfBirth}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Địa chỉ: <b>{{employee.address}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Bậc nghề: <b>{{employee.jobLevel}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số năm kinh nghiệm: <b>{{employee.seniority}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Vị trí: <b>{{employee.position}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Account ID: <b>{{employee.accountId}}</b></mat-list-item>
+                    <mat-list-item role="listitem"><button mat-raised-button color="primary" (click)="openDialogUpdateEmployee(employee.id)">Sửa thông tin</button></mat-list-item>
+                </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Quản lý phiếu lương">
+            <div>
+                <button mat-raised-button color="primary" (click)="getEmployeeByUsername()" style="margin-top: 15px;">Liệt kê tất cả phiếu lương</button>
+                <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="searchPaycheckByTimeAndEmployeeID()">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tháng</mat-label>
+                        <input type="number" matInput placeholder="Ex. 111111" [(ngModel)]="month" name="month" required>
+                    </mat-form-field>
+                    <mat-form-field class="edit-customer-input" appearance="fill">
+                        <mat-label>Năm</mat-label>
+                        <input type="number" matInput placeholder="Ex. 111111" [(ngModel)]="year" name="year" required>
+                    </mat-form-field>
+                    <button type="submit" mat-raised-button color="primary" style="margin-left: 20px;">Tìm kiếm</button>
+                </form>
+                <table mat-table [dataSource]="paycheckDataSource" class="mat-elevation-z8"> -->
+                    <ng-container matColumnDef="paycheckId">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.paycheckId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="employeeId">
+                        <th mat-header-cell *matHeaderCellDef> ID nhân viên </th>
+                        <td mat-cell *matCellDef="let element">{{element.employeeId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="employeeName">
+                        <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
+                        <td mat-cell *matCellDef="let element">{{element.employeeName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Tổng lương</th>
+                        <td mat-cell *matCellDef="let element">{{element.amount | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="monthlySalary">
+                        <th mat-header-cell *matHeaderCellDef>Lương cứng hàng tháng</th>
+                        <td mat-cell *matCellDef="let element">{{element.monthlySalary | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdDate">
+                        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+                        <td mat-cell *matCellDef="let element">{{element.createdDate}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="month">
+                        <th mat-header-cell *matHeaderCellDef>Tháng</th>
+                        <td mat-cell *matCellDef="let element">{{element.month}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="year">
+                        <th mat-header-cell *matHeaderCellDef>Năm</th>
+                        <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedPaycheck"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedPaycheck;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

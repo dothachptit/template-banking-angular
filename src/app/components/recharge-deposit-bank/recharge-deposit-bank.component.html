@@ -1,0 +1,17 @@
+<h2>Nạp tiền vào tài khoản gửi tiền</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onRechargeDepositBank()" [formGroup]="rechargeDepositBankForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>ID Tài khoản nhận</mat-label>
+            <input matInput formControlName="targetBankId" placeholder="Ex. 111111" [(ngModel)]="rechargeDepositBank.targetBankId" name="targetBankId">
+            <mat-error *ngIf="rechargeDepositBankForm.controls['targetBankId']?.errors?.['required']">ID tài khoản nhận không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tiền muốn gửi</mat-label>
+            <input type="number" matInput formControlName="money" placeholder="Ex. 1000000" value="" [(ngModel)]="rechargeDepositBank.money" name="money">
+            <mat-error *ngIf="rechargeDepositBankForm.controls['money']?.errors?.['required']">Số tiền gửi không được để trống</mat-error>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!rechargeDepositBankForm.valid" cdkFocusInitial>Xác nhận gửi tiền</button>
+    </form>
+</mat-dialog-content>

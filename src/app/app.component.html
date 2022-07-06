@@ -1,0 +1,25 @@
+<mat-toolbar style="background-color: #ee0033;color: white;text-align: center;cursor: pointer;">
+    <div style="vertical-align: middle;margin-left: 30px;">
+        <mat-icon style="font-size: 45px; margin-top: 10px;">savings</mat-icon>
+    </div>
+    <div style="margin-left: 50px;font-size: 25px;">
+        HOME
+    </div>
+    <app-login-status style="margin-left: auto;"></app-login-status>
+</mat-toolbar>
+
+<!--END HEADER-->
+<div *ngIf="role == 'ADMIN'">
+    <app-admin-home>
+    </app-admin-home>
+</div>
+<div *ngIf="role == 'EMPLOYEE'">
+    <app-employee-home>
+    </app-employee-home>
+</div>
+<div *ngIf="role == 'CUSTOMER'">
+    <app-customer-home>
+    </app-customer-home>
+</div>
+<router-outlet></router-outlet>
+<notifier-container></notifier-container>

@@ -1,0 +1,39 @@
+<h2>Sửa khách hàng</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onEditCustomer()" [formGroup]="customerForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>ID</mat-label>
+            <input type="text" matInput formControlName="id" placeholder="Ex. 111111" value="" [(ngModel)]="customer.id" name="id" readonly>
+            <mat-error *ngIf="customerForm.controls['id']?.errors?.['required']">ID không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số CMT</mat-label>
+            <input type="text" matInput formControlName="idCard" placeholder="Ex. toanhv22" value="" [(ngModel)]="customer.idCard" name="idCard">
+            <mat-error *ngIf="customerForm.controls['idCard']?.errors?.['required']">Số CMT không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Tên</mat-label>
+            <input type="text" matInput formControlName="fullName" placeholder="Ex. Hoàng Vĩnh Toàn" value="" [(ngModel)]="customer.fullName" name="fullName">
+            <mat-error *ngIf="customerForm.controls['fullName']?.errors?.['required']">Tên không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>SĐT</mat-label>
+            <input type="text" matInput formControlName="phoneNumber" placeholder="Ex. 012345678" value="" [(ngModel)]="customer.phoneNumber" name="phoneNumber">
+            <mat-error *ngIf="customerForm.controls['phoneNumber']?.errors?.['required']">SĐT không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+            <mat-label>Ngày sinh</mat-label>
+            <input matInput formControlName="dateOfBirth" [matDatepicker]="picker1" value="" [(ngModel)]="customer.dateOfBirth" name="dateOfBirth">
+            <mat-error *ngIf="customerForm.controls['dateOfBirth']?.errors?.['required']">Ngày sinh không được để trống</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Địa chỉ</mat-label>
+            <input type="text" matInput formControlName="address" placeholder="Ex. Hà Nội" value="" [(ngModel)]="customer.address" name="address">
+            <mat-error *ngIf="customerForm.controls['address']?.errors?.['required']">Địa chỉ không được để trống</mat-error>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!customerForm.valid" cdkFocusInitial>Xác nhận sửa</button>
+    </form>
+</mat-dialog-content>

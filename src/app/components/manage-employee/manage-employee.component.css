@@ -1,0 +1,32 @@
+.bang {
+    margin-left: 300px;
+    width: 1000px;
+    margin-top: 50px;
+}
+
+.add-btn {
+    padding-bottom: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mat-row {
+    text-align: center;
+    font-weight: 500;
+}
+
+td,
+th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100px;
+}

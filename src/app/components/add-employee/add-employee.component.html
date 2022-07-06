@@ -1,0 +1,59 @@
+<h2>Thêm nhân viên</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onAddEmployee()" [formGroup]="employeeForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>ID</mat-label>
+            <input type="text" matInput formControlName="id" placeholder="Ex. 111111" [(ngModel)]="employee.id" name="id">
+            <mat-error *ngIf="employeeForm.controls['id']?.errors?.['required']">ID không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số CMT</mat-label>
+            <input type="text" matInput formControlName="idCard" placeholder="Ex. 111111" [(ngModel)]="employee.idCard" name="idCard">
+            <mat-error *ngIf="employeeForm.controls['idCard']?.errors?.['required']">Số CMT không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Tên</mat-label>
+            <input type="text" matInput formControlName="fullName" placeholder="Ex. toanvh22" [(ngModel)]="employee.fullName" name="fullName">
+            <mat-error *ngIf="employeeForm.controls['fullName']?.errors?.['required']">Tên không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>SĐT</mat-label>
+            <input type="text" matInput formControlName="phoneNumber" placeholder="Ex. 079657534" [(ngModel)]="employee.phoneNumber" name="phoneNumber">
+            <mat-error *ngIf="employeeForm.controls['phoneNumber']?.errors?.['required']">SĐT không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Lương tháng</mat-label>
+            <input type="number" matInput formControlName="monthlySalary" placeholder="Ex. 10000000" [(ngModel)]="employee.monthlySalary" name="monthlySalary">
+            <mat-error *ngIf="employeeForm.controls['monthlySalary']?.errors?.['required']">Lương tháng không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+            <mat-label>Ngày sinh</mat-label>
+            <input matInput formControlName="dateOfBirth" [matDatepicker]="picker1" value="" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+            <mat-error *ngIf="employeeForm.controls['dateOfBirth']?.errors?.['required']">Ngày sinh không được để trống</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Địa chỉ</mat-label>
+            <input type="text" matInput formControlName="address" placeholder="Ex. HN" [(ngModel)]="employee.address" name="address">
+            <mat-error *ngIf="employeeForm.controls['address']?.errors?.['required']">Địa chỉ không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Bậc nghề</mat-label>
+            <input type="number" matInput formControlName="jobLevel" placeholder="Ex. 2" [(ngModel)]="employee.jobLevel" name="jobLevel">
+            <mat-error *ngIf="employeeForm.controls['jobLevel']?.errors?.['required']">Bậc nghề không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số năm kinh nghiệm</mat-label>
+            <input type="number" matInput formControlName="seniority" placeholder="Ex. 3" [(ngModel)]="employee.seniority" name="seniority">
+            <mat-error *ngIf="employeeForm.controls['seniority']?.errors?.['required']">Số năm kinh nghiệm không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Vị trí</mat-label>
+            <input type="text" matInput formControlName="position" placeholder="Ex. Developer" [(ngModel)]="employee.position" name="position">
+            <mat-error *ngIf="employeeForm.controls['position']?.errors?.['required']">Vị trí không được để trống</mat-error>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!employeeForm.valid" cdkFocusInitial>Xác nhận thêm</button>
+    </form>
+</mat-dialog-content>

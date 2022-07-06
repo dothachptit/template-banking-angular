@@ -1,0 +1,35 @@
+.bang {
+    margin-left: 300px;
+    width: 1000px;
+    margin-top: 50px;
+}
+
+.add-btn {
+    padding-bottom: 20px;
+}
+
+.add-account-form {
+    display: block;
+    justify-content: space-between;
+}
+
+.add-account-input {
+    width: 40%;
+    padding: 10px 30px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mat-row {
+    text-align: center;
+    font-weight: 500;
+}

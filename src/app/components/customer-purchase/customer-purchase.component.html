@@ -1,0 +1,27 @@
+<h2>Thanh toán mua hàng</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onPurchase()" [formGroup]="purchaseForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tài khoản nguồn </mat-label>
+            <input type="text" formControlName="sourceBankId" *ngIf="purchase.sourceBankId === undefined" matInput placeholder="Ex. 111111" [(ngModel)]="purchase.sourceBankId" name="sourceBankId" required>
+            <input type="text" formControlName="sourceBankId" *ngIf="purchase.sourceBankId !== undefined" matInput placeholder="Ex. 111111" [(ngModel)]="purchase.sourceBankId" name="sourceBankId" required readonly>
+            <mat-error *ngIf="purchaseForm.controls['sourceBankId']?.errors?.['required']">Mã tài khoản nguồn không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tài khoản đích</mat-label>
+            <input type="text" matInput formControlName="targetBankId" placeholder="Ex. toanhv22" value="" [(ngModel)]="purchase.targetBankId" name="targetBankId">
+            <mat-error *ngIf="purchaseForm.controls['targetBankId']?.errors?.['required']">Mã tài khoản đích không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tiền muốn thanh toán</mat-label>
+            <input type="number" matInput formControlName="money" placeholder="Ex. toanhv22" value="" [(ngModel)]="purchase.money" name="money">
+            <mat-error *ngIf="purchaseForm.controls['money']?.errors?.['required']">Số tiền không được để trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Nội dung giao dịch</mat-label>
+            <input type="text" matInput formControlName="content" placeholder="Ex. toanhv22" value="" [(ngModel)]="purchase.content" name="content">
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!purchaseForm.valid" cdkFocusInitial>Xác nhận thanh toán</button>
+    </form>
+</mat-dialog-content>

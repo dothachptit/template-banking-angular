@@ -1,0 +1,62 @@
+<h2>Thêm tài khoản gửi tiền</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onAddDepositBank()" [formGroup]="depositAccountForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>ID</mat-label>
+            <input type="text" matInput formControlName="id" placeholder="Ex. 111111" [(ngModel)]="depositBank.id" name="id">
+            <mat-error *ngIf="depositAccountForm.controls['id']?.errors?.['required']">ID không được để trống</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số dư</mat-label>
+            <input matInput formControlName="balance" placeholder="Ex. 2000000" value="" [(ngModel)]="depositBank.balance" name="balance">
+            <mat-error *ngIf="depositAccountForm.controls['balance']?.errors?.['required']">Số dư tài khoản không được để trống</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Lãi suất</mat-label>
+            <input matInput formControlName="interestRate" placeholder="Ex. 8" value="" [(ngModel)]="depositBank.interestRate" name="interestRate">
+            <mat-error *ngIf="depositAccountForm.controls['interestRate']?.errors?.['required']">Lãi suất không được để trống</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+            <mat-label>Ngày tạo</mat-label>
+            <input matInput formControlName="createdDate" [matDatepicker]="picker1" value="" [(ngModel)]="depositBank.createdDate" name="createdDate">
+            <mat-error *ngIf="depositAccountForm.controls['createdDate']?.errors?.['required']">Ngày tạo không được để trống</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số dư min</mat-label>
+            <input matInput formControlName="minBalance" placeholder="Ex. 100000" value="" [(ngModel)]="depositBank.minBalance" name="minBalance">
+            <mat-error *ngIf="depositAccountForm.controls['minBalance']?.errors?.['required']">Số dư không được để trống</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tiền nạp lần đầu</mat-label>
+            <input matInput formControlName="firstRecharge" placeholder="Ex. 10000000" value="" [(ngModel)]="depositBank.firstRecharge" name="firstRecharge">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+            <mat-label>Ngày nạp đầu</mat-label>
+            <input matInput formControlName="firstDepositDate" [matDatepicker]="picker2" value="" [(ngModel)]="depositBank.firstDepositDate" name="firstDepositDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Mã nhân viên</mat-label>
+            <input matInput formControlName="employeeId" placeholder="Ex. 224466" value="" [(ngModel)]="depositBank.employeeId" name="employeeId">
+            <mat-error *ngIf="depositAccountForm.controls['employeeId']?.errors?.['required']">Mã nhân viên không được để trống</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Mã khách hàng</mat-label>
+            <input matInput formControlName="customerId" placeholder="Ex. 224466" value="" [(ngModel)]="depositBank.customerId" name="customerId">
+            <mat-error *ngIf="depositAccountForm.controls['customerId']?.errors?.['required']">Mã khách hàng không được để trống</mat-error>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!depositAccountForm.valid" cdkFocusInitial>Xác nhận thêm</button>
+    </form>
+</mat-dialog-content>

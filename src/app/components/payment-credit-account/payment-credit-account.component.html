@@ -1,0 +1,27 @@
+<h2>Trả nợ cho tài khoản tín dụng</h2>
+<mat-dialog-content>
+    <form class="edit-customer-form" style="margin-top: 20px;" (ngSubmit)="onPaymentCreditBank()" [formGroup]="paymentCreditAccountForm">
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tài khoản gửi tiền</mat-label>
+            <input *ngIf="paymentCreditAccount.depositAccountId === undefined" matInput formControlName="depositAccountId" placeholder="Ex. 111111" [(ngModel)]="paymentCreditAccount.depositAccountId" name="depositAccountId">
+            <input *ngIf="paymentCreditAccount.depositAccountId !== undefined" matInput formControlName="depositAccountId" placeholder="Ex. 111111" [(ngModel)]="paymentCreditAccount.depositAccountId" name="depositAccountId" readonly>
+            <mat-error *ngIf="paymentCreditAccountForm.controls['depositAccountId']?.errors?.['required']">Số tài khoản gửi tiền không được trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tài khoản tín dụng</mat-label>
+            <input matInput formControlName="creditAccountId" placeholder="Ex. toanhv22" value="" [(ngModel)]="paymentCreditAccount.creditAccountId" name="creditAccountId">
+            <mat-error *ngIf="paymentCreditAccountForm.controls['creditAccountId']?.errors?.['required']">Số tài khoản tín dụng không được trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Số tiền muốn thanh toán</mat-label>
+            <input matInput formControlName="money" placeholder="Ex. toanhv22" value="" [(ngModel)]="paymentCreditAccount.money" name="money">
+            <mat-error *ngIf="paymentCreditAccountForm.controls['money']?.errors?.['required']">Số tiền không được trống</mat-error>
+        </mat-form-field>
+        <mat-form-field class="edit-customer-input" appearance="fill">
+            <mat-label>Nội dung giao dịch</mat-label>
+            <input matInput formControlName="content" placeholder="Ex. toanhv22" value="" [(ngModel)]="paymentCreditAccount.content" name="content">
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-dialog-close mat-raised-button color="primary" [disabled]="!paymentCreditAccountForm.valid" cdkFocusInitial>Xác nhận thanh toán</button>
+    </form>
+</mat-dialog-content>

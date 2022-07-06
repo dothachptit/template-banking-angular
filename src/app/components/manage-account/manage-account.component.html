@@ -1,0 +1,77 @@
+<div class="table-responsive bang">
+    <div class="search">
+        <mat-form-field appearance="fill">
+            <mat-label>Tên tài khoản</mat-label>
+            <input type="text" matInput placeholder="Ex. toanhv22" value="" [(ngModel)]="usernameSearching">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSearchAccount()" style="margin-left: 50px;">Tìm kiếm</button>
+        <button mat-raised-button color="primary" (click)="getAllAccount()" style="margin-left: 50px;">Liệt kê toàn bộ tài khoản</button>
+    </div>
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Danh sách tài khoản">
+            <div>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+
+                    <!-- username Column -->
+                    <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef>Tên tài khoản</th>
+                        <td mat-cell *matCellDef="let element">{{element.username}}</td>
+                    </ng-container>
+
+                    <!-- role Column -->
+                    <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef>Chức danh</th>
+                        <td mat-cell *matCellDef="let element">{{element.role}}</td>
+                    </ng-container>
+
+                    <!-- email Column -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef>Email</th>
+                        <td mat-cell *matCellDef="let element">{{element.email}}</td>
+                    </ng-container>
+
+                    <!-- button Column -->
+                    <ng-container matColumnDef="delete-button">
+                        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="warn" (click)="onDelete(element.username)">Xoá</button></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Thêm tài khoản">
+            <form class="add-account-form" style="margin-top: 20px;" (ngSubmit)="onSubmit()" [formGroup]="accountRegistrationForm">
+                <mat-form-field class="add-account-input" appearance="fill">
+                    <mat-label>Tên tài khoản</mat-label>
+                    <input type="text" matInput formControlName="username" placeholder="Ex. toanhv22" value="" [(ngModel)]="accountRegistration.username" name="username">
+                    <mat-error *ngIf="accountRegistrationForm.controls['username']?.errors?.['required']">Tên tài khoản không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-account-input" appearance="fill">
+                    <mat-label>Mật khẩu</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Ex. toanhv22" value="" [(ngModel)]="accountRegistration.password" name="password">
+                    <mat-error *ngIf="accountRegistrationForm.controls['password']?.errors?.['required']">Mật khẩu không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-account-input" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email" placeholder="Ex. toanhv22@gmail.com" value="" [(ngModel)]="accountRegistration.email" name="email">
+                    <mat-error *ngIf="accountRegistrationForm.controls['email']?.errors?.['required']">Email không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-account-input" appearance="fill">
+                    <mat-label>Mã nhân viên hoặc mã khách hàng</mat-label>
+                    <input type="text" matInput formControlName="infoId" placeholder="Ex. 56743867" value="" [(ngModel)]="accountRegistration.infoId" name="infoId">
+                    <mat-error *ngIf="accountRegistrationForm.controls['infoId']?.errors?.['required']">Mã nhân viên hoặc khách hàng không được để trống</mat-error>
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary" (click)="onEmployeeClick()" [disabled]="!accountRegistrationForm.valid" cdkFocusInitial>Đăng ký tài khoản nhân viên</button>
+                <button type="submit" mat-raised-button color="primary" (click)="onCustomerClick()" style="margin-left: 30px;" [disabled]="!accountRegistrationForm.valid" cdkFocusInitial>Đăng ký tài khoản khách hàng</button>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>

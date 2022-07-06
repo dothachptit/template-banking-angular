@@ -1,0 +1,168 @@
+<div class="table-responsive bang">
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Quản lý giao dịch tín dụng">
+            <div class="search" style="margin-top: 10px;">
+                <form (ngSubmit)="onSearchCreditTransactionByTime()">
+                    <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+                        <mat-label>Ngày bắt đầu</mat-label>
+                        <input matInput [matDatepicker]="picker1" value="" [(ngModel)]="creditTransactionDate.startDate" name="startDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field color="accent" class="edit-customer-input" appearance="fill" style="margin-left: 15px;">
+                        <mat-label>Ngày kết thúc</mat-label>
+                        <input matInput [matDatepicker]="picker2" value="" [(ngModel)]="creditTransactionDate.endDate" name="endDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" style="margin-left: 50px;">Tìm kiếm theo thời gian</button>
+                </form>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>ID giao dịch</mat-label>
+                    <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idCreditTransaction">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSearchCreditTransactionByID()" style="margin-left: 50px;">Tìm kiếm theo mã giao dịch</button>
+                <mat-form-field appearance="fill" style="margin-left: 15px;">
+                    <mat-label>ID khách hàng</mat-label>
+                    <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idCreditCustomer">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSearchCreditTransactionByIDCustomer()" style="margin-left: 50px;">Tìm kiếm theo mã khách hàng</button>
+            </div>
+            <div>
+                <table mat-table [dataSource]="creditdataSource" class="mat-elevation-z8">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerId">
+                        <th mat-header-cell *matHeaderCellDef>Mã khách hàng</th>
+                        <td mat-cell *matCellDef="let element">{{element.customerId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerName">
+                        <th mat-header-cell *matHeaderCellDef>Tên khách hàng</th>
+                        <td mat-cell *matCellDef="let element">{{element.customerName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Số tiền</th>
+                        <td mat-cell *matCellDef="let element">{{element.amount | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Loại giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.type}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="idBankSource">
+                        <th mat-header-cell *matHeaderCellDef>Tài khoản nguồn</th>
+                        <td mat-cell *matCellDef="let element">{{element.idBankSource}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="idBankTarget">
+                        <th mat-header-cell *matHeaderCellDef>Tài khoản đích</th>
+                        <td mat-cell *matCellDef="let element">{{element.idBankTarget}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="transactionDate">
+                        <th mat-header-cell *matHeaderCellDef>Ngày giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.transactionDate }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="content">
+                        <th mat-header-cell *matHeaderCellDef>Nội dung giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.content}}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Quản lý giao dịch gửi tiền">
+            <div class="search" style="margin-top: 10px;">
+                <form (ngSubmit)="onSearchDepositTransactionByTime()">
+                    <mat-form-field color="accent" class="edit-customer-input" appearance="fill">
+                        <mat-label>Ngày bắt đầu</mat-label>
+                        <input matInput [matDatepicker]="picker3" value="" [(ngModel)]="depositTransactionDate.startDate" name="startDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field color="accent" class="edit-customer-input" appearance="fill" style="margin-left: 15px;">
+                        <mat-label>Ngày kết thúc</mat-label>
+                        <input matInput [matDatepicker]="picker4" value="" [(ngModel)]="depositTransactionDate.endDate" name="endDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" style="margin-left: 50px;">Tìm kiếm theo thời gian</button>
+                </form>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>ID giao dịch</mat-label>
+                    <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idDepositTransaction">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSearchDepositTransactionByID()" style="margin-left: 50px;">Tìm kiếm theo mã giao dịch</button>
+                <mat-form-field appearance="fill" style="margin-left: 15px;">
+                    <mat-label>ID khách hàng</mat-label>
+                    <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idDepositCustomer">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSearchDepositTransactionByIDCustomer()" style="margin-left: 50px;">Tìm kiếm theo mã khách hàng</button>
+            </div>
+            <div>
+                <table mat-table [dataSource]="depositdataSource" class="mat-elevation-z8">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerId">
+                        <th mat-header-cell *matHeaderCellDef>Mã khách hàng</th>
+                        <td mat-cell *matCellDef="let element">{{element.customerId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerName">
+                        <th mat-header-cell *matHeaderCellDef>Tên khách hàng</th>
+                        <td mat-cell *matCellDef="let element">{{element.customerName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Số tiền</th>
+                        <td mat-cell *matCellDef="let element">{{element.amount | currency: 'VND'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Loại giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.type}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="idBankSource">
+                        <th mat-header-cell *matHeaderCellDef>Tài khoản nguồn</th>
+                        <td mat-cell *matCellDef="let element">{{element.idBankSource}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="idBankTarget">
+                        <th mat-header-cell *matHeaderCellDef>Tài khoản đích</th>
+                        <td mat-cell *matCellDef="let element">{{element.idBankTarget}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="transactionDate">
+                        <th mat-header-cell *matHeaderCellDef>Ngày giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.transactionDate }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="content">
+                        <th mat-header-cell *matHeaderCellDef>Nội dung giao dịch</th>
+                        <td mat-cell *matCellDef="let element">{{element.content}}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

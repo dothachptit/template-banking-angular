@@ -1,0 +1,35 @@
+<div class="table-responsive bang">
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Tài khoản tín dụng">
+            <div>
+                <mat-list role="list" style="color: black;font-weight: bold;">
+                    <mat-list-item role="listitem">ID:
+                        <b>{{creditBank.id}}</b>
+                    </mat-list-item>
+                    <mat-list-item role="listitem">Số dư: <b>{{creditBank.balance}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Lãi suất: <b>{{creditBank.interestRate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày tạo: <b>{{creditBank.createdDate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số nợ tối đa: <b>{{creditBank.maxLoan}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày hết hạn: <b>{{creditBank.expirationDate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">ID khách hàng: <b>{{creditBank.customerId}}</b></mat-list-item>
+                </mat-list>
+                <button mat-raised-button color="primary" (click)="openDialogPaymentCreditBank()">Trả nợ cho tài khoản tín dụng</button>
+                <button mat-raised-button color="primary" style="margin-left: 20px;" (click)="openDialogPaymentDepositBank()">Thanh toán mua hàng</button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Tài khoản gửi tiền">
+            <div>
+                <mat-list role="list" style="color: black;font-weight: bold;">
+                    <mat-list-item role="listitem">ID:<b>{{depositBank.id }}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số dư: <b>{{depositBank.balance}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Lãi suất: <b>{{depositBank.interestRate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày tạo: <b>{{depositBank.createdDate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số dư tối thiểu: <b>{{depositBank.minBalance}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số tiền nạp đầu tiên: <b>{{depositBank.firstRecharge}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày nạp đầu tiên: <b>{{depositBank.firstDepositDate}}</b></mat-list-item>
+                    <mat-list-item role="listitem">ID khách hàng: <b>{{depositBank.customerId}}</b></mat-list-item>
+                </mat-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,0 +1,109 @@
+<div class="table-responsive bang">
+    <div class="search">
+        <mat-form-field appearance="fill">
+            <mat-label>ID khách hàng</mat-label>
+            <input matInput placeholder="Ex. 012345" value="" [(ngModel)]="idCustomerSearching">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSearchCustomerByID()" style="margin-left: 50px;">Tìm kiếm theo ID khách hàng</button>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Username khách hàng</mat-label>
+            <input matInput placeholder="Ex. toanhv22" value="" [(ngModel)]="usernamecCustomerSearching">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSearchCustomerUsername()" style="margin-left: 50px;">Tìm kiếm theo Username khách hàng</button>
+        <button mat-raised-button color="primary" (click)="getAllCustomer()" style="margin-left: 50px;">Liệt kê toàn bộ tài khoản</button>
+    </div>
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Danh sách khách hàng">
+            <div>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="idCard">
+                        <th mat-header-cell *matHeaderCellDef> Số CMT </th>
+                        <td mat-cell *matCellDef="let element">{{element.idCard}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fullName">
+                        <th mat-header-cell *matHeaderCellDef>Tên </th>
+                        <td mat-cell *matCellDef="let element">{{element.fullName}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="phonenumber">
+                        <th mat-header-cell *matHeaderCellDef>SĐT</th>
+                        <td mat-cell *matCellDef="let element">{{element.phoneNumber}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateOfBirth">
+                        <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+                        <td mat-cell *matCellDef="let element">{{element.dateOfBirth}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
+                        <td mat-cell *matCellDef="let element">{{element.address}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="accountId">
+                        <th mat-header-cell *matHeaderCellDef>Account ID</th>
+                        <td mat-cell *matCellDef="let element">{{element.accountId}}</td>
+                    </ng-container>
+
+                    <!-- button Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="accent" (click)="openDialogUpdateCustomer(element.id)">Sửa</button>
+                            <button mat-raised-button color="warn" (click)="onDelete(element.id)" style="margin-left: 10px;">Xoá</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Thêm khách hàng">
+            <form class="add-customer-form" style="margin-top: 20px;" (ngSubmit)="onAddCustomer()" [formGroup]="customerForm">
+                <mat-form-field class="add-customer-input" appearance="fill">
+                    <mat-label>ID</mat-label>
+                    <input type="text" matInput formControlName="id" placeholder="Ex. 111111" value="" [(ngModel)]="newCustomer.id" name="id">
+                    <mat-error *ngIf="customerForm.controls['id']?.errors?.['required']">ID không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-customer-input" appearance="fill">
+                    <mat-label>Số CMT</mat-label>
+                    <input type="text" matInput formControlName="idCard" placeholder="Ex. toanhv22" value="" [(ngModel)]="newCustomer.idCard" name="idCard">
+                    <mat-error *ngIf="customerForm.controls['idCard']?.errors?.['required']">Số CMT không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-customer-input" appearance="fill">
+                    <mat-label>Tên</mat-label>
+                    <input type="text" matInput formControlName="fullName" placeholder="Ex. Hoàng Vĩnh Toàn" value="" [(ngModel)]="newCustomer.fullName" name="fullName">
+                    <mat-error *ngIf="customerForm.controls['fullName']?.errors?.['required']">Tên không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field class="add-customer-input" appearance="fill">
+                    <mat-label>SĐT</mat-label>
+                    <input type="text" matInput formControlName="phoneNumber" placeholder="Ex. 012345678" value="" [(ngModel)]="newCustomer.phoneNumber" name="phoneNumber">
+                    <mat-error *ngIf="customerForm.controls['phoneNumber']?.errors?.['required']">SĐT không được để trống</mat-error>
+                </mat-form-field>
+                <mat-form-field color="accent" class="add-customer-input" appearance="fill">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput formControlName="dateOfBirth" [matDatepicker]="picker1" value="" [(ngModel)]="newCustomer.dateOfBirth" name="dateOfBirth">
+                    <mat-error *ngIf="customerForm.controls['dateOfBirth']?.errors?.['required']">Ngày sinh không được để trống</mat-error>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="add-customer-input" appearance="fill">
+                    <mat-label>Địa chỉ</mat-label>
+                    <input type="text" matInput formControlName="address" placeholder="Ex. Hà Nội" value="" [(ngModel)]="newCustomer.address" name="address">
+                    <mat-error *ngIf="customerForm.controls['address']?.errors?.['required']">Địa chỉ không được để trống</mat-error>
+                </mat-form-field>
+                <br>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!customerForm.valid" cdkFocusInitial>Thêm khách hàng</button>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>

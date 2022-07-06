@@ -1,0 +1,20 @@
+<div class="table-responsive bang">
+    <mat-tab-group animationDuration="1ms">
+        <mat-tab label="Thông tin khách hàng">
+            <div>
+                <mat-list role="list" style="color: black;font-weight: bold;">
+                    <mat-list-item role="listitem">ID:
+                        <b>{{customer.id}}</b>
+                    </mat-list-item>
+                    <mat-list-item role="listitem">Số CMT: <b>{{customer.idCard}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Tên: <b>{{customer.fullName}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Số điện thoại: <b>{{customer.phoneNumber}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Ngày sinh: <b>{{customer.dateOfBirth}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Địa chỉ: <b>{{customer.address}}</b></mat-list-item>
+                    <mat-list-item role="listitem">Account ID: <b>{{customer.accountId}}</b></mat-list-item>
+                    <mat-list-item role="listitem"><button mat-raised-button color="primary" (click)="openDialogUpdateCustomer(customer.id)">Sửa thông tin</button></mat-list-item>
+                </mat-list>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
